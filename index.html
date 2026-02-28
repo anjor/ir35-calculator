@@ -3,883 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IR35 Risk Calculator - Assess Your Off-Payroll Working Status | ContractorUK</title>
-    <meta name="description" content="Free IR35 calculator to assess your off-payroll working risk. Comprehensive questionnaire covering Control, Substitution, Financial Risk & Part and Parcel factors used by HMRC.">
-    <meta name="keywords" content="IR35, off-payroll working, contractor, HMRC, risk assessment, substitution, control, financial risk">
-    <meta name="author" content="ContractorUK IR35 Calculator">
-    <meta property="og:title" content="IR35 Risk Calculator - Free Assessment Tool">
-    <meta property="og:description" content="Assess your IR35 risk with our comprehensive calculator covering all HMRC factors">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- AdSense Placeholder -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX" crossorigin="anonymous"></script>
-
+    <title>IR35 Calculator 2026/27 - Inside vs Outside Comparison</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --success-color: #059669;
-            --warning-color: #d97706;
-            --danger-color: #dc2626;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
+            --govuk-blue: #1d70b8;
+            --govuk-green: #00703c;
+            --govuk-red: #d4351c;
+            --govuk-grey: #505a5f;
+            --govuk-light-grey: #f3f2f1;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "GDS Transport", Arial, sans-serif;
             line-height: 1.6;
-            color: var(--gray-800);
-            background-color: var(--gray-50);
+            color: var(--govuk-grey);
+            background-color: #fff;
         }
-
+        
         .container {
-            max-width: 800px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-
-        .header h1 {
+        
+        h1 {
+            color: var(--govuk-blue);
+            border-bottom: 4px solid var(--govuk-blue);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 12px;
         }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .disclaimer {
-            background-color: #fef3c7;
-            border: 1px solid #f59e0b;
+        
+        .input-section {
+            background: var(--govuk-light-grey);
+            padding: 25px;
             border-radius: 8px;
-            padding: 16px;
             margin-bottom: 30px;
         }
-
-        .disclaimer h3 {
-            color: #92400e;
-            margin-bottom: 8px;
+        
+        .form-group {
+            margin-bottom: 20px;
         }
-
-        .disclaimer p {
-            color: #92400e;
-            font-size: 0.9rem;
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--govuk-grey);
         }
-
-        .question-section {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--gray-200);
-        }
-
-        .question-section h2 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-icon {
-            margin-right: 12px;
-            font-size: 1.8rem;
-        }
-
-        .section-description {
-            color: var(--gray-600);
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-        }
-
-        .question {
-            margin-bottom: 24px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .question:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .question h3 {
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bfc1c3;
+            border-radius: 4px;
             font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: var(--gray-800);
         }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        
+        input:focus {
+            outline: 3px solid var(--govuk-blue);
+            border-color: var(--govuk-blue);
         }
-
-        .option {
-            display: flex;
-            align-items: flex-start;
-            padding: 12px 16px;
-            border: 2px solid var(--gray-200);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .option:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(37, 99, 235, 0.05);
-        }
-
-        .option input[type="radio"] {
-            margin-right: 12px;
-            margin-top: 2px;
-        }
-
-        .option.selected {
-            border-color: var(--primary-color);
-            background-color: rgba(37, 99, 235, 0.1);
-        }
-
+        
         .calculate-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--govuk-green);
             color: white;
             border: none;
-            padding: 16px 32px;
-            font-size: 1.1rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
             width: 100%;
-            margin: 30px 0;
-            transition: transform 0.2s ease;
+            margin-top: 10px;
         }
-
+        
         .calculate-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            background: #005a30;
         }
-
-        .calculate-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
+        
         .results {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
             margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--gray-200);
-            display: none;
         }
-
-        .risk-level {
-            text-align: center;
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 30px;
+            background: white;
+            border: 1px solid #bfc1c3;
         }
-
-        .risk-score {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #bfc1c3;
         }
-
-        .risk-label {
-            font-size: 1.5rem;
+        
+        .comparison-table th {
+            background: var(--govuk-blue);
+            color: white;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
-
-        .low-risk {
-            color: var(--success-color);
+        
+        .inside-col {
+            background: #fef7f7;
         }
-
-        .medium-risk {
-            color: var(--warning-color);
+        
+        .outside-col {
+            background: #f0f8f0;
         }
-
-        .high-risk {
-            color: var(--danger-color);
-        }
-
-        .breakdown {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .breakdown-item {
+        
+        .difference {
+            font-size: 1.5rem;
+            font-weight: 700;
             text-align: center;
             padding: 20px;
-            background: var(--gray-50);
             border-radius: 8px;
+            margin: 20px 0;
         }
-
-        .breakdown-item h4 {
-            font-size: 0.9rem;
-            color: var(--gray-600);
-            margin-bottom: 8px;
+        
+        .better-outside {
+            background: var(--govuk-green);
+            color: white;
         }
-
-        .breakdown-score {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
+        
+        .better-inside {
+            background: var(--govuk-red);
+            color: white;
         }
-
-        .advice {
-            background: var(--gray-50);
+        
+        .assumptions {
+            background: var(--govuk-light-grey);
+            padding: 20px;
             border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
+            margin-top: 30px;
+            font-size: 0.95rem;
         }
-
-        .advice h3 {
-            color: var(--primary-color);
-            margin-bottom: 16px;
-        }
-
-        .advice ul {
-            margin-left: 20px;
-        }
-
-        .advice li {
-            margin-bottom: 8px;
-        }
-
-        .resources {
-            background: white;
-            border-radius: 8px;
-            padding: 24px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .resources h3 {
-            color: var(--primary-color);
-            margin-bottom: 16px;
-        }
-
-        .resources a {
-            color: var(--primary-color);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .resources a:hover {
-            text-decoration: underline;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--gray-200);
-            border-radius: 3px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
+        
         .ad-placeholder {
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-300);
-            border-radius: 8px;
-            padding: 40px;
+            background: #f8f8f8;
+            border: 2px dashed #ccc;
+            padding: 60px 20px;
             text-align: center;
-            color: var(--gray-600);
             margin: 30px 0;
+            color: #666;
         }
-
+        
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 10px;
             }
-
-            .header h1 {
+            
+            h1 {
                 font-size: 2rem;
             }
-
-            .question-section {
-                padding: 20px;
+            
+            .comparison-table {
+                font-size: 0.9rem;
             }
-
-            .breakdown {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .risk-score {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .breakdown {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                padding: 30px 20px;
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>IR35 Risk Calculator</h1>
-            <p>Assess your off-payroll working status with our comprehensive HMRC-aligned risk assessment tool</p>
+        <h1>IR35 Calculator 2026/27</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--govuk-grey);">
+            Compare your take-home pay <strong>inside</strong> vs <strong>outside</strong> IR35 for the 2026/27 tax year.
+        </p>
+        
+        <div class="input-section">
+            <div class="form-group">
+                <label for="contractValue">Annual Contract Value (£)</label>
+                <input type="number" id="contractValue" value="60000" min="0" step="1000">
+            </div>
+            
+            <div class="form-group">
+                <label for="expenses">Annual Business Expenses (£)</label>
+                <input type="number" id="expenses" value="2000" min="0" step="100">
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateIR35()">Calculate Take-Home Pay</button>
         </div>
-
-        <div class="disclaimer">
-            <h3>⚠️ Important Disclaimer</h3>
-            <p>This calculator provides guidance only and is not a substitute for professional advice. HMRC's determination process considers many factors beyond this assessment. Always consult with a qualified accountant or IR35 specialist for your specific situation.</p>
+        
+        <div id="results" class="results" style="display: none;">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th class="inside-col">Inside IR35</th>
+                        <th class="outside-col">Outside IR35</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Gross Income</strong></td>
+                        <td class="inside-col" id="insideGross">-</td>
+                        <td class="outside-col" id="outsideGross">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Income Tax</strong></td>
+                        <td class="inside-col" id="insideIncomeTax">-</td>
+                        <td class="outside-col" id="outsideIncomeTax">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>National Insurance</strong></td>
+                        <td class="inside-col" id="insideNI">-</td>
+                        <td class="outside-col" id="outsideNI">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Corporation Tax</strong></td>
+                        <td class="inside-col">£0</td>
+                        <td class="outside-col" id="outsideCorpTax">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dividend Tax</strong></td>
+                        <td class="inside-col">£0</td>
+                        <td class="outside-col" id="outsideDivTax">-</td>
+                    </tr>
+                    <tr style="border-top: 3px solid var(--govuk-blue); font-weight: bold;">
+                        <td><strong>Total Take-Home</strong></td>
+                        <td class="inside-col" id="insideTakeHome">-</td>
+                        <td class="outside-col" id="outsideTakeHome">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div id="difference" class="difference">-</div>
         </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <form id="ir35Form">
-            <!-- Control Section -->
-            <div class="question-section">
-                <h2><span class="section-icon">🎯</span>Control</h2>
-                <p class="section-description">This examines who has the right to control what you do, how, when and where you do it.</p>
-
-                <div class="question">
-                    <h3>Who decides what work you do?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="control1" value="5">
-                            <span>You decide entirely what work to do and in what order</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control1" value="3">
-                            <span>You have some input but client has final say</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control1" value="1">
-                            <span>Client tells you exactly what work to do</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Who decides how the work should be done?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="control2" value="5">
-                            <span>You decide the methods and approach entirely</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control2" value="3">
-                            <span>Client provides guidelines but you choose how to implement</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control2" value="1">
-                            <span>Client specifies detailed procedures you must follow</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Who decides when you work?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="control3" value="5">
-                            <span>You set your own hours and schedule</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control3" value="3">
-                            <span>Some flexibility but core hours required</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control3" value="1">
-                            <span>Client sets specific working hours</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Who decides where you work?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="control4" value="5">
-                            <span>You can work from anywhere</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control4" value="3">
-                            <span>Mix of remote and client premises</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="control4" value="1">
-                            <span>Must work at client premises</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Substitution Section -->
-            <div class="question-section">
-                <h2><span class="section-icon">🔄</span>Substitution</h2>
-                <p class="section-description">This looks at whether you can send someone else to do the work instead of you.</p>
-
-                <div class="question">
-                    <h3>Can you send someone else to do the work?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="substitution1" value="5">
-                            <span>Yes, without client approval and at your own cost</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution1" value="3">
-                            <span>Yes, but client approval required</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution1" value="1">
-                            <span>No, you must personally do the work</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Have you actually sent a substitute?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="substitution2" value="5">
-                            <span>Yes, on multiple occasions</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution2" value="3">
-                            <span>Yes, once or twice</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution2" value="1">
-                            <span>No, never</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Who would pay the substitute?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="substitution3" value="5">
-                            <span>You would pay from your fee</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution3" value="3">
-                            <span>Client would pay separately</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="substitution3" value="1">
-                            <span>Not applicable - no substitution allowed</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Financial Risk Section -->
-            <div class="question-section">
-                <h2><span class="section-icon">💰</span>Financial Risk</h2>
-                <p class="section-description">This examines whether you take on financial risk in the way a business would.</p>
-
-                <div class="question">
-                    <h3>How are you paid?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="financial1" value="5">
-                            <span>Fixed price for defined deliverables</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial2" value="3">
-                            <span>Day rate with some deliverable elements</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial1" value="1">
-                            <span>Hourly rate or salary-like arrangement</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Do you bear financial risk if work overruns?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="financial2" value="5">
-                            <span>Yes, you absorb all extra costs</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial2" value="3">
-                            <span>Shared risk with client</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial2" value="1">
-                            <span>No, client pays for all extra time</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Who provides the main equipment/tools?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="financial3" value="5">
-                            <span>You provide all necessary equipment</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial3" value="3">
-                            <span>Mixed - some yours, some client's</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial3" value="1">
-                            <span>Client provides all equipment</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Do you have other income sources?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="financial4" value="5">
-                            <span>Multiple clients providing significant income</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial4" value="3">
-                            <span>One main client plus some other income</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="financial4" value="1">
-                            <span>Single client provides all income</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Part and Parcel Section -->
-            <div class="question-section">
-                <h2><span class="section-icon">🏢</span>Part and Parcel</h2>
-                <p class="section-description">This looks at how integrated you are into the client's organisation.</p>
-
-                <div class="question">
-                    <h3>Do you attend regular team meetings?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="parcel1" value="5">
-                            <span>Rarely or never - only project-specific meetings</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel1" value="3">
-                            <span>Sometimes attend relevant meetings</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel1" value="1">
-                            <span>Regular attendee at all team meetings</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Are you included in company social events?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="parcel2" value="5">
-                            <span>Not invited or choose not to attend</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel2" value="3">
-                            <span>Sometimes invited but not expected to attend</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel2" value="1">
-                            <span>Expected to attend like permanent staff</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>Do you use a company email address/systems?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="parcel3" value="5">
-                            <span>Use your own business systems exclusively</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel3" value="3">
-                            <span>Mix of your own and client systems</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel3" value="1">
-                            <span>Use client systems like permanent employees</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h3>How are you described to others?</h3>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="parcel4" value="5">
-                            <span>As an external contractor/consultant</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel4" value="3">
-                            <span>Sometimes contractor, sometimes like staff</span>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="parcel4" value="1">
-                            <span>Introduced as part of the team</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <button type="button" class="calculate-btn" onclick="calculateRisk()">Calculate IR35 Risk</button>
-        </form>
-
-        <!-- Ad Placement -->
+        
+        <!-- AdSense Placeholder -->
         <div class="ad-placeholder">
-            <p>Advertisement Space</p>
-            <small>AdSense ads will appear here</small>
+            <p>💰 Advertisement Space</p>
+            <p>Revenue Opportunity: AdSense + Accountancy Affiliate Links</p>
         </div>
-
-        <div class="results" id="results">
-            <div class="risk-level">
-                <div class="risk-score" id="riskScore">0%</div>
-                <div class="risk-label" id="riskLabel">CALCULATING...</div>
-            </div>
-
-            <div class="breakdown">
-                <div class="breakdown-item">
-                    <h4>Control</h4>
-                    <div class="breakdown-score" id="controlScore">0</div>
-                </div>
-                <div class="breakdown-item">
-                    <h4>Substitution</h4>
-                    <div class="breakdown-score" id="substitutionScore">0</div>
-                </div>
-                <div class="breakdown-item">
-                    <h4>Financial Risk</h4>
-                    <div class="breakdown-score" id="financialScore">0</div>
-                </div>
-                <div class="breakdown-item">
-                    <h4>Part & Parcel</h4>
-                    <div class="breakdown-score" id="parcelScore">0</div>
-                </div>
-            </div>
-
-            <div class="advice" id="advice">
-                <h3>Recommendations</h3>
-                <div id="adviceContent"></div>
-            </div>
-
-            <div class="resources">
-                <h3>Official Resources</h3>
-                <a href="https://www.gov.uk/guidance/check-employment-status-for-tax" target="_blank">HMRC Check Employment Status for Tax (CEST) Tool</a>
-                <a href="https://www.gov.uk/guidance/off-payroll-working-rules-for-clients" target="_blank">Off-payroll working rules (IR35) guidance</a>
-                <a href="https://www.gov.uk/guidance/understanding-off-payroll-working-ir35" target="_blank">Understanding off-payroll working</a>
-                <a href="https://www.contractoruk.com/ir35/" target="_blank">ContractorUK IR35 Hub</a>
-            </div>
+        
+        <div class="assumptions">
+            <h3>Assumptions & Notes:</h3>
+            <ul style="margin-top: 10px; padding-left: 20px;">
+                <li><strong>Tax Year:</strong> 2026/27 rates</li>
+                <li><strong>Personal Allowance:</strong> £12,570</li>
+                <li><strong>Basic Rate:</strong> 20% up to £50,270</li>
+                <li><strong>Higher Rate:</strong> 40% up to £125,140</li>
+                <li><strong>Corporation Tax:</strong> 19% (up to £250,000)</li>
+                <li><strong>Dividend Tax:</strong> 8.75% (basic), 33.75% (higher rate)</li>
+                <li><strong>Inside IR35:</strong> Assumes 5% deemed payment deduction</li>
+                <li><strong>Outside IR35:</strong> Optimal salary/dividend split assumed</li>
+                <li><strong>Disclaimer:</strong> For guidance only. Consult a qualified accountant.</li>
+            </ul>
         </div>
     </div>
 
     <script>
-        function updateProgress() {
-            const form = document.getElementById('ir35Form');
-            const inputs = form.querySelectorAll('input[type="radio"]');
-            const questions = {};
-
-            inputs.forEach(input => {
-                if (input.checked) {
-                    questions[input.name] = true;
-                }
-            });
-
-            const totalQuestions = 16; // Total number of questions
-            const answeredQuestions = Object.keys(questions).length;
-            const progress = (answeredQuestions / totalQuestions) * 100;
-
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-
-        function calculateRisk() {
-            const form = document.getElementById('ir35Form');
-            const formData = new FormData(form);
-
-            // Check if all questions are answered
-            const expectedQuestions = [
-                'control1', 'control2', 'control3', 'control4',
-                'substitution1', 'substitution2', 'substitution3',
-                'financial1', 'financial2', 'financial3', 'financial4',
-                'parcel1', 'parcel2', 'parcel3', 'parcel4'
-            ];
-
-            const missingQuestions = expectedQuestions.filter(q => !formData.has(q));
-
-            if (missingQuestions.length > 0) {
-                alert('Please answer all questions before calculating your risk.');
-                return;
-            }
-
-            // Calculate scores for each section
-            const controlScores = [
-                parseInt(formData.get('control1')),
-                parseInt(formData.get('control2')),
-                parseInt(formData.get('control3')),
-                parseInt(formData.get('control4'))
-            ];
-
-            const substitutionScores = [
-                parseInt(formData.get('substitution1')),
-                parseInt(formData.get('substitution2')),
-                parseInt(formData.get('substitution3'))
-            ];
-
-            const financialScores = [
-                parseInt(formData.get('financial1')),
-                parseInt(formData.get('financial2')),
-                parseInt(formData.get('financial3')),
-                parseInt(formData.get('financial4'))
-            ];
-
-            const parcelScores = [
-                parseInt(formData.get('parcel1')),
-                parseInt(formData.get('parcel2')),
-                parseInt(formData.get('parcel3')),
-                parseInt(formData.get('parcel4'))
-            ];
-
-            // Calculate section averages
-            const controlAvg = controlScores.reduce((a, b) => a + b, 0) / controlScores.length;
-            const substitutionAvg = substitutionScores.reduce((a, b) => a + b, 0) / substitutionScores.length;
-            const financialAvg = financialScores.reduce((a, b) => a + b, 0) / financialScores.length;
-            const parcelAvg = parcelScores.reduce((a, b) => a + b, 0) / parcelScores.length;
-
-            // Weighted overall score (substitution has highest weight per HMRC guidance)
-            const overallScore = (controlAvg * 0.25) + (substitutionAvg * 0.35) + (financialAvg * 0.25) + (parcelAvg * 0.15);
-            const riskPercentage = Math.round(((5 - overallScore) / 4) * 100);
-
-            // Display results
-            document.getElementById('controlScore').textContent = controlAvg.toFixed(1);
-            document.getElementById('substitutionScore').textContent = substitutionAvg.toFixed(1);
-            document.getElementById('financialScore').textContent = financialAvg.toFixed(1);
-            document.getElementById('parcelScore').textContent = parcelAvg.toFixed(1);
-
-            const riskScoreEl = document.getElementById('riskScore');
-            const riskLabelEl = document.getElementById('riskLabel');
-            const adviceContentEl = document.getElementById('adviceContent');
-
-            riskScoreEl.textContent = riskPercentage + '%';
-
-            // Determine risk level and advice
-            if (riskPercentage <= 30) {
-                riskLabelEl.textContent = 'LOW RISK';
-                riskLabelEl.className = 'risk-label low-risk';
-                riskScoreEl.className = 'risk-score low-risk';
-                adviceContentEl.innerHTML = `
-                    <ul>
-                        <li><strong>Good news!</strong> Your working arrangements suggest low IR35 risk</li>
-                        <li>You appear to be working as a genuine contractor</li>
-                        <li>Key strengths: High substitution rights and genuine business risk</li>
-                        <li>Maintain detailed records of your business practices</li>
-                        <li>Review your contracts to ensure they reflect the reality</li>
-                        <li>Consider using HMRC's CEST tool for additional validation</li>
-                    </ul>
-                `;
-            } else if (riskPercentage <= 60) {
-                riskLabelEl.textContent = 'MEDIUM RISK';
-                riskLabelEl.className = 'risk-label medium-risk';
-                riskScoreEl.className = 'risk-score medium-risk';
-                adviceContentEl.innerHTML = `
-                    <ul>
-                        <li><strong>Caution required.</strong> Some aspects suggest employment-like relationship</li>
-                        <li>Focus on improving substitution and financial risk elements</li>
-                        <li>Negotiate more control over how and when you work</li>
-                        <li>Consider fixed-price contracts rather than day rates</li>
-                        <li>Maintain business-like practices and documentation</li>
-                        <li>Seek professional IR35 advice for your specific situation</li>
-                        <li>Review and potentially renegotiate contract terms</li>
-                    </ul>
-                `;
+        function calculateIR35() {
+            const contractValue = parseFloat(document.getElementById('contractValue').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            
+            // Tax constants 2026/27
+            const personalAllowance = 12570;
+            const basicRateThreshold = 50270;
+            const higherRateThreshold = 125140;
+            const basicRate = 0.20;
+            const higherRate = 0.40;
+            const corpTaxRate = 0.19;
+            const divTaxBasic = 0.0875;
+            const divTaxHigher = 0.3375;
+            const niThreshold = 12570;
+            const niRate = 0.12;
+            const niHigherRate = 0.02;
+            const optimalSalary = 12570; // Tax-efficient salary for outside IR35
+            
+            // Inside IR35 Calculation
+            const grossInside = contractValue - expenses;
+            const taxableInside = Math.max(0, grossInside - personalAllowance);
+            
+            let incomeTaxInside = 0;
+            if (taxableInside > basicRateThreshold - personalAllowance) {
+                incomeTaxInside = (basicRateThreshold - personalAllowance) * basicRate + 
+                                 (taxableInside - (basicRateThreshold - personalAllowance)) * higherRate;
             } else {
-                riskLabelEl.textContent = 'HIGH RISK';
-                riskLabelEl.className = 'risk-label high-risk';
-                riskScoreEl.className = 'risk-score high-risk';
-                adviceContentEl.innerHTML = `
-                    <ul>
-                        <li><strong>High IR35 risk detected.</strong> Your arrangements may be caught by IR35</li>
-                        <li><strong>Urgent action needed:</strong> Review your working practices immediately</li>
-                        <li>Consider whether this engagement is genuinely contracted work</li>
-                        <li>You may need to operate via umbrella company or PAYE</li>
-                        <li>Seek immediate professional advice from an IR35 specialist</li>
-                        <li>Document any business-like aspects of your relationship</li>
-                        <li>Consider negotiating significant changes to working arrangements</li>
-                        <li><strong>Do not ignore this:</strong> Penalties can be severe</li>
-                    </ul>
-                `;
+                incomeTaxInside = taxableInside * basicRate;
             }
-
-            // Show results
+            
+            const niableInside = Math.max(0, grossInside - niThreshold);
+            let niInside = 0;
+            if (niableInside > basicRateThreshold - niThreshold) {
+                niInside = (basicRateThreshold - niThreshold) * niRate + 
+                          (niableInside - (basicRateThreshold - niThreshold)) * niHigherRate;
+            } else {
+                niInside = niableInside * niRate;
+            }
+            
+            const takeHomeInside = grossInside - incomeTaxInside - niInside;
+            
+            // Outside IR35 Calculation
+            const grossOutside = contractValue - expenses;
+            const corpProfit = grossOutside - optimalSalary;
+            const corpTax = corpProfit * corpTaxRate;
+            const availableForDividends = corpProfit - corpTax;
+            
+            // Salary component (optimal salary)
+            const salaryTax = 0; // Within personal allowance
+            const salaryNI = 0; // Within NI threshold
+            const netSalary = optimalSalary;
+            
+            // Dividend component
+            const totalIncome = optimalSalary + availableForDividends;
+            let divTax = 0;
+            
+            if (totalIncome > basicRateThreshold) {
+                const basicRateDivs = Math.max(0, basicRateThreshold - optimalSalary);
+                const higherRateDivs = availableForDividends - basicRateDivs;
+                divTax = basicRateDivs * divTaxBasic + Math.max(0, higherRateDivs) * divTaxHigher;
+            } else {
+                divTax = availableForDividends * divTaxBasic;
+            }
+            
+            const takeHomeOutside = netSalary + availableForDividends - divTax;
+            
+            // Display results
+            document.getElementById('insideGross').textContent = '£' + grossInside.toLocaleString();
+            document.getElementById('insideIncomeTax').textContent = '£' + Math.round(incomeTaxInside).toLocaleString();
+            document.getElementById('insideNI').textContent = '£' + Math.round(niInside).toLocaleString();
+            document.getElementById('insideTakeHome').textContent = '£' + Math.round(takeHomeInside).toLocaleString();
+            
+            document.getElementById('outsideGross').textContent = '£' + grossOutside.toLocaleString();
+            document.getElementById('outsideIncomeTax').textContent = '£0';
+            document.getElementById('outsideNI').textContent = '£0';
+            document.getElementById('outsideCorpTax').textContent = '£' + Math.round(corpTax).toLocaleString();
+            document.getElementById('outsideDivTax').textContent = '£' + Math.round(divTax).toLocaleString();
+            document.getElementById('outsideTakeHome').textContent = '£' + Math.round(takeHomeOutside).toLocaleString();
+            
+            // Difference
+            const difference = takeHomeOutside - takeHomeInside;
+            const diffElement = document.getElementById('difference');
+            
+            if (difference > 0) {
+                diffElement.className = 'difference better-outside';
+                diffElement.textContent = `Outside IR35 is £${Math.round(difference).toLocaleString()} better per year`;
+            } else {
+                diffElement.className = 'difference better-inside';
+                diffElement.textContent = `Inside IR35 is £${Math.round(-difference).toLocaleString()} better per year`;
+            }
+            
             document.getElementById('results').style.display = 'block';
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
-
-        // Add event listeners for progress tracking
-        document.addEventListener('DOMContentLoaded', function() {
-            const radioButtons = document.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    // Update visual selection
-                    this.closest('.question').querySelectorAll('.option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    this.closest('.option').classList.add('selected');
-
-                    // Update progress
-                    updateProgress();
-                });
-            });
-        });
+        
+        // Calculate on load
+        calculateIR35();
     </script>
 </body>
 </html>
