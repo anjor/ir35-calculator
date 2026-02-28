@@ -3,178 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IR35 Calculator 2026/27 - Inside vs Outside Comparison</title>
+    <title>IR35 Calculator 2026/27 - Inside vs Outside Tax Comparison</title>
+    <meta name="description" content="Calculate your take-home pay under IR35 rules. Compare inside vs outside IR35 scenarios for UK contractors with 2026/27 tax rates.">
     <style>
-        :root {
-            --govuk-blue: #1d70b8;
-            --govuk-green: #00703c;
-            --govuk-red: #d4351c;
-            --govuk-grey: #505a5f;
-            --govuk-light-grey: #f3f2f1;
-        }
-        
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: "GDS Transport", Arial, sans-serif;
+            font-family: "GDS Transport", arial, sans-serif;
             line-height: 1.6;
-            color: var(--govuk-grey);
-            background-color: #fff;
+            color: #0b0c0c;
+            background-color: #f3f2f1;
         }
-        
+
         .container {
-            max-width: 960px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
-        h1 {
-            color: var(--govuk-blue);
-            border-bottom: 4px solid var(--govuk-blue);
-            padding-bottom: 10px;
+
+        .header {
+            background-color: #0b0c0c;
+            color: white;
+            padding: 20px 0;
             margin-bottom: 30px;
+        }
+
+        .header h1 {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: bold;
+            text-align: center;
         }
-        
-        .input-section {
-            background: var(--govuk-light-grey);
-            padding: 25px;
-            border-radius: 8px;
+
+        .header p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #b1b4b6;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             margin-bottom: 30px;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+
+        .input-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
         label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--govuk-grey);
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #0b0c0c;
         }
-        
-        input {
+
+        input[type="number"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid #bfc1c3;
+            border: 2px solid #b1b4b6;
             border-radius: 4px;
             font-size: 1.1rem;
+            transition: border-color 0.2s;
         }
-        
-        input:focus {
-            outline: 3px solid var(--govuk-blue);
-            border-color: var(--govuk-blue);
+
+        input[type="number"]:focus {
+            outline: 3px solid #ffdd00;
+            border-color: #0b0c0c;
         }
-        
+
         .calculate-btn {
-            background: var(--govuk-green);
+            background-color: #00703c;
             color: white;
-            border: none;
             padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            border: none;
             border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
+            transition: background-color 0.2s;
         }
-        
+
         .calculate-btn:hover {
-            background: #005a30;
+            background-color: #005a30;
         }
-        
-        .results {
-            margin-top: 30px;
-        }
-        
-        .comparison-table {
+
+        .results-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
-            background: white;
-            border: 1px solid #bfc1c3;
+            margin-top: 20px;
         }
-        
-        .comparison-table th,
-        .comparison-table td {
-            padding: 15px;
+
+        .results-table th,
+        .results-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #b1b4b6;
+        }
+
+        .results-table th {
+            background-color: #f3f2f1;
+            font-weight: bold;
+        }
+
+        .results-table .label {
             text-align: left;
-            border-bottom: 1px solid #bfc1c3;
+            font-weight: bold;
         }
-        
-        .comparison-table th {
-            background: var(--govuk-blue);
+
+        .inside-column {
+            background-color: #fdf2f2;
+        }
+
+        .outside-column {
+            background-color: #f2f8f2;
+        }
+
+        .total-row {
+            background-color: #005a30;
             color: white;
-            font-weight: 600;
+            font-weight: bold;
         }
-        
-        .inside-col {
-            background: #fef7f7;
+
+        .difference-row {
+            background-color: #ffdd00;
+            font-weight: bold;
+            color: #0b0c0c;
         }
-        
-        .outside-col {
-            background: #f0f8f0;
-        }
-        
-        .difference {
-            font-size: 1.5rem;
-            font-weight: 700;
+
+        .tax-year-info {
+            background-color: #1d70b8;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
             text-align: center;
-            padding: 20px;
-            border-radius: 8px;
+        }
+
+        .warning-box {
+            background-color: #fff2e6;
+            border-left: 4px solid #f47738;
+            padding: 15px;
             margin: 20px 0;
         }
-        
-        .better-outside {
-            background: var(--govuk-green);
-            color: white;
+
+        .info-box {
+            background-color: #e6f3ff;
+            border-left: 4px solid #1d70b8;
+            padding: 15px;
+            margin: 20px 0;
         }
-        
-        .better-inside {
-            background: var(--govuk-red);
-            color: white;
-        }
-        
-        .assumptions {
-            background: var(--govuk-light-grey);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-            font-size: 0.95rem;
-        }
-        
-        .ad-placeholder {
-            background: #f8f8f8;
+
+        .adsense-placeholder {
+            background-color: #f8f8f8;
             border: 2px dashed #ccc;
             padding: 60px 20px;
             text-align: center;
-            margin: 30px 0;
             color: #666;
+            margin: 30px 0;
+            border-radius: 4px;
         }
-        
+
+        .breakdown-section {
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .breakdown-column h3 {
+            color: #0b0c0c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b1b4b6;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f3f2f1;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px solid #b1b4b6;
+        }
+
         @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
             .container {
                 padding: 10px;
             }
-            
-            h1 {
-                font-size: 2rem;
+
+            .input-section,
+            .results-section,
+            .breakdown-section {
+                padding: 20px;
             }
-            
-            .comparison-table {
-                font-size: 0.9rem;
-            }
-            
-            .comparison-table th,
-            .comparison-table td {
-                padding: 8px;
-            }
+        }
+
+        .footer {
+            background-color: #0b0c0c;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .assumptions {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .assumptions h4 {
+            margin-bottom: 10px;
+            color: #0b0c0c;
+        }
+
+        .assumptions ul {
+            margin-left: 20px;
+        }
+
+        .assumptions li {
+            margin-bottom: 5px;
         }
     </style>
 </head>
